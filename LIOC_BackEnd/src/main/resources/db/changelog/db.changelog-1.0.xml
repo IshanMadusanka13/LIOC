@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2-create-user-table" author="author">
+        <createTable tableName="user" schemaName="lioc_filling">
+            <column name="userid" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(45)"/>
+            <column name="password" type="VARCHAR(45)"/>
+            <column name="usertype" type="VARCHAR(45)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3-create-customer-table" author="author">
+        <createTable tableName="customer" schemaName="lioc_filling">
+            <column name="customerid" type="VARCHAR(45)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(45)"/>
+            <column name="nic" type="VARCHAR(45)"/>
+            <column name="mobile" type="VARCHAR(45)"/>
+            <column name="creditamount" type="DOUBLE"/>
+            <column name="userid" type="INT"/>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="customer"
+                baseColumnNames="userid"
+                constraintName="fk_customer_user1"
+                referencedTableName="user"
+                referencedColumnNames="userid"
+                onDelete="NO ACTION"
+                onUpdate="NO ACTION"/>
+    </changeSet>
+
+    <changeSet id="4-create-supplier-table" author="author">
+        <createTable tableName="supplier" schemaName="lioc_filling">
+            <column name="supplierid" type="VARCHAR(45)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(45)"/>
+            <column name="nic" type="VARCHAR(45)"/>
+            <column name="mobile" type="VARCHAR(45)"/>
+            <column name="userid" type="INT"/>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="supplier"
+                baseColumnNames="userid"
+                constraintName="fk_supplier_user"
+                referencedTableName="user"
+                referencedColumnNames="userid"
+                onDelete="NO ACTION"
+                onUpdate="NO ACTION"/>
+    </changeSet>
+
+    <changeSet id="5-create-inventory-table" author="author">
+        <createTable tableName="inventory" schemaName="lioc_filling">
+            <column name="inventoryid" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product" type="VARCHAR(45)"/>
+            <column name="price" type="DOUBLE"/>
+            <column name="qty" type="DOUBLE"/>
+            <column name="supplierid" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="inventory"
+                baseColumnNames="supplierid"
+                constraintName="fk_inventory_supplier1"
+                referencedTableName="supplier"
+                referencedColumnNames="supplierid"
+                onDelete="NO ACTION"
+                onUpdate="NO ACTION"/>
+    </changeSet>
+
+    <changeSet id="6-create-payment-table" author="author">
+        <createTable tableName="payment" schemaName="lioc_filling">
+            <column name="idpayment" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="customerid" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="DATETIME"/>
+            <column name="amount" type="DOUBLE"/>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="payment"
+                baseColumnNames="customerid"
+                constraintName="fk_payment_customer1"
+                referencedTableName="customer"
+                referencedColumnNames="customerid"
+                onDelete="NO ACTION"
+                onUpdate="NO ACTION"/>
+    </changeSet>
+</databaseChangeLog>
