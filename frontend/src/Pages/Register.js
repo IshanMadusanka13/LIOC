@@ -6,9 +6,10 @@ const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    nic: '',
     password: '',
     confirmPassword: '',
-    role: 'customer'
+    
   });
 
   const navigate = useNavigate();
@@ -55,6 +56,19 @@ const Register = () => {
             />
           </div>
           <div className="mb-4">
+  <label className="block text-gray-700 text-sm font-bold mb-2">
+    NIC Number
+  </label>
+  <input
+    type="text"
+    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+    placeholder="Enter your NIC number"
+    value={formData.nic}
+    onChange={(e) => setFormData({...formData, nic: e.target.value})}
+    required
+  />
+</div>
+          <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Password
             </label>
@@ -80,21 +94,7 @@ const Register = () => {
               required
             />
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Role
-            </label>
-            <select
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-              value={formData.role}
-              onChange={(e) => setFormData({...formData, role: e.target.value})}
-            >
-              <option value="customer">Customer Manager</option>
-              <option value="inventory">Inventory Manager</option>
-              <option value="sales">Sales Manager</option>
-              <option value="supplier">Supplier Manager</option>
-            </select>
-          </div>
+          
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"

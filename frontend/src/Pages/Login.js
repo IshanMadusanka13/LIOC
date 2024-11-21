@@ -5,8 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
-    role: 'customer' // Default role
+    password: ''
+   
   });
 
   const navigate = useNavigate();
@@ -48,21 +48,7 @@ const Login = () => {
               required
             />
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Role
-            </label>
-            <select
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-              value={formData.role}
-              onChange={(e) => setFormData({...formData, role: e.target.value})}
-            >
-              <option value="customer">Customer Manager</option>
-              <option value="inventory">Inventory Manager</option>
-              <option value="sales">Sales Manager</option>
-              <option value="supplier">Supplier Manager</option>
-            </select>
-          </div>
+          
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"

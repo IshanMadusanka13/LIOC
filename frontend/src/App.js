@@ -4,6 +4,10 @@ import HomePage from './Pages/Homepage';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Dashboard from './Pages/Dashboard';
+import InventoryM from './Pages/InventoryM';
+import SalesM from './Pages/SalesM';
+import SupplierM from './Pages/SupplierM';
+import CustomerM from './Pages/CustomerM';
 import Navbar from './Components/navbar';
 import Footer from './Components/footer';
 
@@ -17,7 +21,12 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard userRole="sales" />}>
+              <Route path="inventory/*" element={<InventoryM />} />
+              <Route path="sales/*" element={<SalesM />} />
+              <Route path="supplier/*" element={<SupplierM />} />
+              <Route path="customer/*" element={<CustomerM />} />
+        </Route>
           </Routes>
         </main>
         <Footer />
