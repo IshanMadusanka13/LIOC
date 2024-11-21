@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="insert-products" author="admin">
+        <insert tableName="product" schemaName="lioc_filling">
+            <column name="productid" value="1"/>
+            <column name="product" value="Petrol"/>
+            <column name="unitprice" value="150.00"/>
+        </insert>
+        <insert tableName="product" schemaName="lioc_filling">
+            <column name="productid" value="2"/>
+            <column name="product" value="Diesel"/>
+            <column name="unitprice" value="130.00"/>
+        </insert>
+        <insert tableName="product" schemaName="lioc_filling">
+            <column name="productid" value="3"/>
+            <column name="product" value="Kerosene"/>
+            <column name="unitprice" value="120.00"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

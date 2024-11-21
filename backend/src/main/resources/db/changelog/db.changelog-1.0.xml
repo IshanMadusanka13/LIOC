@@ -4,9 +4,9 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="2-create-user-table" author="author">
+    <changeSet id="create-table-user" author="admin">
         <createTable tableName="user" schemaName="lioc_filling">
-            <column name="userid" type="INT">
+            <column name="userid" type="INT" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="email" type="VARCHAR(45)"/>
@@ -15,9 +15,9 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="3-create-customer-table" author="author">
+    <changeSet id="create-table-customer" author="admin">
         <createTable tableName="customer" schemaName="lioc_filling">
-            <column name="customerid" type="VARCHAR(45)">
+            <column name="customerid" type="INT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(45)"/>
@@ -29,73 +29,123 @@
         <addForeignKeyConstraint
                 baseTableName="customer"
                 baseColumnNames="userid"
-                constraintName="fk_customer_user1"
                 referencedTableName="user"
                 referencedColumnNames="userid"
-                onDelete="NO ACTION"
-                onUpdate="NO ACTION"/>
+                constraintName="fk_customer_user1"/>
     </changeSet>
 
-    <changeSet id="4-create-supplier-table" author="author">
+    <changeSet id="create-table-supplier" author="admin">
         <createTable tableName="supplier" schemaName="lioc_filling">
-            <column name="supplierid" type="VARCHAR(45)">
+            <column name="supplierid" type="INT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(45)"/>
-            <column name="nic" type="VARCHAR(45)"/>
             <column name="mobile" type="VARCHAR(45)"/>
-            <column name="userid" type="INT"/>
         </createTable>
-        <addForeignKeyConstraint
-                baseTableName="supplier"
-                baseColumnNames="userid"
-                constraintName="fk_supplier_user"
-                referencedTableName="user"
-                referencedColumnNames="userid"
-                onDelete="NO ACTION"
-                onUpdate="NO ACTION"/>
     </changeSet>
 
-    <changeSet id="5-create-inventory-table" author="author">
+    <changeSet id="create-table-product" author="admin">
+        <createTable tableName="product" schemaName="lioc_filling">
+            <column name="productid" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product" type="VARCHAR(45)"/>
+            <column name="unitprice" type="DOUBLE"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-supplier-supply-product" author="admin">
+        <createTable tableName="supplier_supply_product" schemaName="lioc_filling">
+            <column name="supplierid" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="productid" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="supplier_supply_product"
+                baseColumnNames="supplierid"
+                referencedTableName="supplier"
+                referencedColumnNames="supplierid"
+                constraintName="fk_supplier_has_product_supplier1"/>
+        <addForeignKeyConstraint
+                baseTableName="supplier_supply_product"
+                baseColumnNames="productid"
+                referencedTableName="product"
+                referencedColumnNames="productid"
+                constraintName="fk_supplier_has_product_product1"/>
+    </changeSet>
+
+    <changeSet id="create-table-inventory" author="admin">
         <createTable tableName="inventory" schemaName="lioc_filling">
             <column name="inventoryid" type="INT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="product" type="VARCHAR(45)"/>
-            <column name="price" type="DOUBLE"/>
+            <column name="productid" type="INT"/>
+            <column name="supplierid" type="INT"/>
             <column name="qty" type="DOUBLE"/>
-            <column name="supplierid" type="VARCHAR(45)">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
         <addForeignKeyConstraint
                 baseTableName="inventory"
-                baseColumnNames="supplierid"
-                constraintName="fk_inventory_supplier1"
-                referencedTableName="supplier"
-                referencedColumnNames="supplierid"
-                onDelete="NO ACTION"
-                onUpdate="NO ACTION"/>
+                baseColumnNames="supplierid, productid"
+                referencedTableName="supplier_supply_product"
+                referencedColumnNames="supplierid, productid"
+                constraintName="fk_inventory_supplier_supply_product1"/>
     </changeSet>
 
-    <changeSet id="6-create-payment-table" author="author">
+    <changeSet id="create-table-payment" author="admin">
         <createTable tableName="payment" schemaName="lioc_filling">
-            <column name="idpayment" type="INT">
+            <column name="paymentid" type="INT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="customerid" type="VARCHAR(45)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="customerid" type="INT"/>
             <column name="date" type="DATETIME"/>
             <column name="amount" type="DOUBLE"/>
         </createTable>
         <addForeignKeyConstraint
                 baseTableName="payment"
                 baseColumnNames="customerid"
-                constraintName="fk_payment_customer1"
                 referencedTableName="customer"
                 referencedColumnNames="customerid"
-                onDelete="NO ACTION"
-                onUpdate="NO ACTION"/>
+                constraintName="fk_payment_customer1"/>
     </changeSet>
+
+    <changeSet id="create-table-employee" author="admin">
+        <createTable tableName="employee" schemaName="lioc_filling">
+            <column name="employeeid" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(45)"/>
+            <column name="nic" type="VARCHAR(45)"/>
+            <column name="mobile" type="VARCHAR(45)"/>
+            <column name="role" type="VARCHAR(45)"/>
+            <column name="userid" type="INT"/>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="employee"
+                baseColumnNames="userid"
+                referencedTableName="user"
+                referencedColumnNames="userid"
+                constraintName="fk_employee_user1"/>
+    </changeSet>
+
+    <changeSet id="create-table-sales" author="admin">
+        <createTable tableName="sales" schemaName="lioc_filling">
+            <column name="salesid" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="machine" type="VARCHAR(45)"/>
+            <column name="date" type="DATE"/>
+            <column name="productid" type="INT"/>
+            <column name="qty" type="DOUBLE"/>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="sales"
+                baseColumnNames="productid"
+                referencedTableName="product"
+                referencedColumnNames="productid"
+                constraintName="fk_sales_product1"/>
+    </changeSet>
+
 </databaseChangeLog>
