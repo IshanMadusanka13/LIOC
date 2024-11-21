@@ -5,35 +5,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 const Homepage = () => {
   return (
     <div className="font-sans">
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg bg-blue-500 text-white shadow-lg">
-        <div className="container-fluid">
-          <a className="navbar-brand text-white font-bold" href="#">Fuel Management</a>
-          <div className="navbar-collapse" id="navbarNav">
-  <ul className="navbar-nav ms-auto">
-    <li className="nav-item">
-      <a className="nav-link text-white" href="#home">Home</a>
-    </li>
-    <li className="nav-item">
-      <a className="nav-link text-white" href="#about">About</a>
-    </li>
-    <li className="nav-item">
-      <a className="nav-link text-white" href="#contact">Contact Us</a>
-    </li>
-    <li className="nav-item">
-      <a className="nav-link text-white" href="#team">Team</a>
-    </li>
-    <li className="nav-item">
-      <a className="nav-link text-white" href="/login">Login</a>
-    </li>
-    <li className="nav-item">
-      <a className="btn btn-warning text-blue-500" href="/signup">Sign Up</a>
-    </li>
-  </ul>
-</div>
-
-        </div>
-      </nav>
+      
 
       {/* Slider Section */}
       <section id="home" className="relative text-white">
@@ -123,10 +95,7 @@ const Homepage = () => {
 </section>
 
 
-      {/* Footer */}
-      <footer className="bg-blue-500 text-white py-8 text-center">
-        <p>&copy; 2024 Fuel Management System. All Rights Reserved.</p>
-      </footer>
+      
     </div>
   );
 };
