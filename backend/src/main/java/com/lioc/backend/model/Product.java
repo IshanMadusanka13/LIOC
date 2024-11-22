@@ -23,7 +23,6 @@ public class Product {
     private String product;
 
     @Column(name = "unitprice")
-    @NotBlank(message = "UnitPrice Required")
     private double unitPrice;
 
 }

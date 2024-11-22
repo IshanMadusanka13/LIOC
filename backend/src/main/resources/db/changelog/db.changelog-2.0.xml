@@ -4,22 +4,76 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="insert-products" author="admin">
+    <changeSet id="insert-products-sri-lanka" author="admin">
         <insert tableName="product" schemaName="lioc_filling">
             <column name="productid" value="1"/>
-            <column name="product" value="Petrol"/>
-            <column name="unitprice" value="150.00"/>
+            <column name="product" value="Petrol 92 Octane"/>
+            <column name="unitprice" value="350.00"/>
         </insert>
         <insert tableName="product" schemaName="lioc_filling">
             <column name="productid" value="2"/>
-            <column name="product" value="Diesel"/>
-            <column name="unitprice" value="130.00"/>
+            <column name="product" value="Petrol 95 Octane"/>
+            <column name="unitprice" value="375.00"/>
         </insert>
         <insert tableName="product" schemaName="lioc_filling">
             <column name="productid" value="3"/>
-            <column name="product" value="Kerosene"/>
-            <column name="unitprice" value="120.00"/>
+            <column name="product" value="Diesel"/>
+            <column name="unitprice" value="340.00"/>
+        </insert>
+        <insert tableName="product" schemaName="lioc_filling">
+            <column name="productid" value="4"/>
+            <column name="product" value="Super Diesel"/>
+            <column name="unitprice" value="370.00"/>
         </insert>
     </changeSet>
+
+    <changeSet id="insert-employees-and-users" author="admin">
+        <!-- Insert User Details -->
+        <insert tableName="user" schemaName="lioc_filling">
+            <column name="userid" value="1"/>
+            <column name="email" value="i@gmail.com"/>
+            <column name="password" value="12345678"/>
+            <column name="usertype" value="EMPLOYEE"/>
+        </insert>
+        <insert tableName="user" schemaName="lioc_filling">
+            <column name="userid" value="2"/>
+            <column name="email" value="su@gmail.com"/>
+            <column name="password" value="12345678"/>
+            <column name="usertype" value="EMPLOYEE"/>
+        </insert>
+        <insert tableName="user" schemaName="lioc_filling">
+            <column name="userid" value="3"/>
+            <column name="email" value="sa@gmail.com"/>
+            <column name="password" value="12345678"/>
+            <column name="usertype" value="EMPLOYEE"/>
+        </insert>
+
+        <!-- Insert Employee Details -->
+        <insert tableName="employee" schemaName="lioc_filling">
+            <column name="employeeid" value="1"/>
+            <column name="name" value="John Doe"/>
+            <column name="nic" value="987654321V"/>
+            <column name="mobile" value="0712345678"/>
+            <column name="role" value="Inventory Manager"/>
+            <column name="userid" value="1"/>
+        </insert>
+        <insert tableName="employee" schemaName="lioc_filling">
+            <column name="employeeid" value="2"/>
+            <column name="name" value="Jane Smith"/>
+            <column name="nic" value="123456789V"/>
+            <column name="mobile" value="0771234567"/>
+            <column name="role" value="Supplier Manager"/>
+            <column name="userid" value="2"/>
+        </insert>
+        <insert tableName="employee" schemaName="lioc_filling">
+            <column name="employeeid" value="3"/>
+            <column name="name" value="Mark Johnson"/>
+            <column name="nic" value="456789123V"/>
+            <column name="mobile" value="0789876543"/>
+            <column name="role" value="Sales Manager"/>
+            <column name="userid" value="3"/>
+        </insert>
+    </changeSet>
+
 
 </databaseChangeLog>

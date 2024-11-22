@@ -25,11 +25,9 @@ public class Payment {
     private Customer customer;
 
     @Column(name = "date")
-    @NotBlank(message = "Date Required")
     private Date date;
 
     @Column(name = "amount")
-    @NotBlank(message = "Amount Required")
     private double amount;
 
 }

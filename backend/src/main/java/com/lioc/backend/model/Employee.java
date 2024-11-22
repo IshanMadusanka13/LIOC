@@ -1,5 +1,7 @@
 package com.lioc.backend.model;
 
+import com.lioc.backend.util.enums.EmployeeRoles;
+import com.lioc.backend.util.enums.UserType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -30,9 +32,9 @@ public class Employee {
     @NotBlank(message = "Mobile Required")
     private String mobile;
 
-    @Column(name = "role")
-    @NotBlank(message = "Role is Required")
-    private double role;
+    @Column(name = "role", columnDefinition = "CHAR")
+    @Enumerated(EnumType.STRING)
+    private EmployeeRoles role;
 
     @OneToOne
     @JoinColumn(name = "userid")

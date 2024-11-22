@@ -6,7 +6,7 @@
 
     <changeSet id="create-table-user" author="admin">
         <createTable tableName="user" schemaName="lioc_filling">
-            <column name="userid" type="INT" autoIncrement="false">
+            <column name="userid" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="email" type="VARCHAR(45)"/>
@@ -17,7 +17,7 @@
 
     <changeSet id="create-table-customer" author="admin">
         <createTable tableName="customer" schemaName="lioc_filling">
-            <column name="customerid" type="INT">
+            <column name="customerid" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(45)"/>
@@ -36,7 +36,7 @@
 
     <changeSet id="create-table-supplier" author="admin">
         <createTable tableName="supplier" schemaName="lioc_filling">
-            <column name="supplierid" type="INT">
+            <column name="supplierid" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(45)"/>
@@ -46,7 +46,7 @@
 
     <changeSet id="create-table-product" author="admin">
         <createTable tableName="product" schemaName="lioc_filling">
-            <column name="productid" type="INT">
+            <column name="productid" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="product" type="VARCHAR(45)"/>
@@ -79,7 +79,7 @@
 
     <changeSet id="create-table-inventory" author="admin">
         <createTable tableName="inventory" schemaName="lioc_filling">
-            <column name="inventoryid" type="INT">
+            <column name="inventoryid" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="productid" type="INT"/>
@@ -96,7 +96,7 @@
 
     <changeSet id="create-table-payment" author="admin">
         <createTable tableName="payment" schemaName="lioc_filling">
-            <column name="paymentid" type="INT">
+            <column name="paymentid" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="customerid" type="INT"/>
@@ -113,7 +113,7 @@
 
     <changeSet id="create-table-employee" author="admin">
         <createTable tableName="employee" schemaName="lioc_filling">
-            <column name="employeeid" type="INT">
+            <column name="employeeid" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(45)"/>
@@ -132,7 +132,7 @@
 
     <changeSet id="create-table-sales" author="admin">
         <createTable tableName="sales" schemaName="lioc_filling">
-            <column name="salesid" type="INT">
+            <column name="salesid" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="machine" type="VARCHAR(45)"/>

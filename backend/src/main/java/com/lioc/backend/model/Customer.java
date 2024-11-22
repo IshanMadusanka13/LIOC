@@ -31,10 +31,9 @@ public class Customer {
     private String mobile;
 
     @Column(name = "creditamount")
-    @NotBlank(message = "Credit Amount Required")
     private double creditAmount;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "userid")
     private User user;
 

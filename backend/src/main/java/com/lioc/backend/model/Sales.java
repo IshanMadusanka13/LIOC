@@ -25,7 +25,6 @@ public class Sales {
     private String machine;
 
     @Column(name = "date")
-    @NotBlank(message = "Date is Required")
     private Date date;
 
     @ManyToOne
@@ -33,7 +32,6 @@ public class Sales {
     private Product product;
 
     @Column(name = "qty")
-    @NotBlank(message = "Quantity is Required")
     private double qty;
 
 }

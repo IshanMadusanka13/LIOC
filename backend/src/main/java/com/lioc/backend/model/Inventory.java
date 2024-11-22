@@ -27,7 +27,6 @@ public class Inventory {
     private Supplier supplier;
 
     @Column(name = "qty")
-    @NotBlank(message = "Quantity is Required")
     private double qty;
 
 }

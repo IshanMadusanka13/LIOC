@@ -2,6 +2,7 @@ package com.lioc.backend.controller;
 
 import com.lioc.backend.model.Customer;
 import com.lioc.backend.service.CustomerService;
+import com.lioc.backend.util.dto.CustomerRegisterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +32,8 @@ public class CustomerController {
     }
 
     @PostMapping(value = "/save")
-    public ResponseEntity<String> addCustomer(@RequestBody Customer customer) {
-        return ResponseEntity.ok(customerService.addCustomer(customer));
+    public ResponseEntity<String> addCustomer(@RequestBody CustomerRegisterDTO customerRegisterDTO) {
+        return ResponseEntity.ok(customerService.addCustomer(customerRegisterDTO));
     }
 
     @PutMapping(value = "/update/{nic}")

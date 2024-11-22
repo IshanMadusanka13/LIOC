@@ -2,6 +2,8 @@ package com.lioc.backend.service;
 
 import com.lioc.backend.model.Customer;
 import com.lioc.backend.repository.CustomerRepository;
+import com.lioc.backend.repository.UserRepository;
+import com.lioc.backend.util.dto.CustomerRegisterDTO;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,12 @@ import java.util.NoSuchElementException;
 public class CustomerService {
 
     private CustomerRepository customerRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, UserRepository userRepository) {
         this.customerRepository = customerRepository;
+        this.userRepository = userRepository;
     }
 
     //Find all
@@ -41,15 +45,15 @@ public class CustomerService {
     }
 
     //Insert
-    public String addCustomer(Customer customer) {
-        Customer c = customerRepository.findByNic(customer.getNic());
+    public String addCustomer(CustomerRegisterDTO customerRegisterDTO) {
+        Customer c = customerRepository.findByNic(customerRegisterDTO.DTOToEntity().getNic());
         if (c == null) {
-            customerRepository.save(customer);
+            customerRepository.save(customerRegisterDTO.DTOToEntity());
             log.info("Added new customer");
             return "Customer added Successfully";
         } else {
             log.error("Inserted an already existing customer");
-            throw new NoSuchElementException("customer found with the NIC : " + customer.getNic());
+            throw new NoSuchElementException("customer found with the NIC : " + customerRegisterDTO.DTOToEntity().getNic());
         }
     }
 

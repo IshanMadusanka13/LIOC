@@ -23,12 +23,12 @@ public class User {
     @NotBlank(message = "Email Required")
     private String email;
 
-    @Column(name = "passowrd")
-    @NotBlank(message = "Passowrd Required")
-    private String passowrd;
+    @Column(name = "password")
+    @NotBlank(message = "Password Required")
+    private String password;
 
     @Column(name = "usertype", columnDefinition = "CHAR")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private UserType userType;
 
 }
