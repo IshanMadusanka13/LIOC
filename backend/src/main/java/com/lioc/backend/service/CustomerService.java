@@ -44,6 +44,17 @@ public class CustomerService {
         }
     }
 
+    public Customer searchCustomerByUserId(int uid) {
+        Customer c = customerRepository.findByUser_UserId(uid);
+        if (c == null) {
+            log.error("Searched for a non-existing customer");
+            throw new NoSuchElementException("No Customer Found with the UID : " + uid);
+        } else {
+            log.info("Searched for a customer");
+            return c;
+        }
+    }
+
     //Insert
     public String addCustomer(CustomerRegisterDTO customerRegisterDTO) {
         Customer c = customerRepository.findByNic(customerRegisterDTO.DTOToEntity().getNic());
@@ -61,7 +72,7 @@ public class CustomerService {
     public String updateCustomer(Customer customer, String nic) {
         try {
 
-            Customer c = new Customer();
+            Customer c = customerRepository.findByNic(nic);
             c.setMobile(customer.getMobile());
 
             customerRepository.save(c);

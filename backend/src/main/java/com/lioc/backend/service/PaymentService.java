@@ -1,6 +1,8 @@
 package com.lioc.backend.service;
 
+import com.lioc.backend.model.Customer;
 import com.lioc.backend.model.Payment;
+import com.lioc.backend.repository.CustomerRepository;
 import com.lioc.backend.repository.PaymentRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
@@ -15,10 +17,12 @@ import java.util.NoSuchElementException;
 @Transactional
 public class PaymentService {
     private PaymentRepository paymentRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
-    public PaymentService(PaymentRepository paymentRepository) {
+    public PaymentService(PaymentRepository paymentRepository, CustomerRepository customerRepository) {
         this.paymentRepository = paymentRepository;
+        this.customerRepository = customerRepository;
     }
 
     public List<Payment> getAll() {
@@ -36,14 +40,13 @@ public class PaymentService {
     }
 
     public String addPayment(Payment payment) {
-        Payment p = paymentRepository.findByPaymentId(payment.getPaymentId());
-        if (p == null) {
-            paymentRepository.save(payment);
-            log.info("Added new payment");
-            return "Payment added Successfully";
-        }
-        log.error("Inserted an already existing payment");
-        throw new NoSuchElementException("Payment found with ID: " + payment.getPaymentId());
+        paymentRepository.save(payment);
+        log.info(payment.getCustomer().getCustomerId());
+        Customer c = customerRepository.findByCustomerId(payment.getCustomer().getCustomerId());
+        c.setCreditAmount(c.getCreditAmount() + payment.getAmount());
+        customerRepository.save(c);
+        log.info("Added new payment");
+        return "Payment added Successfully";
     }
 
     public String updatePayment(Payment payment, int paymentId) {

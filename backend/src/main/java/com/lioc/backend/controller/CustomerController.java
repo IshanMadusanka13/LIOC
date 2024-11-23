@@ -26,9 +26,14 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getAll());
     }
 
-    @GetMapping(value = "/search/{nic}")
+    @GetMapping(value = "/search/nic/{nic}")
     public ResponseEntity<Customer> getByNic(@PathVariable String nic) {
         return ResponseEntity.ok(customerService.searchCustomer(nic));
+    }
+
+    @GetMapping(value = "/search/uid/{uid}")
+    public ResponseEntity<Customer> getByUserId(@PathVariable int uid) {
+        return ResponseEntity.ok(customerService.searchCustomerByUserId(uid));
     }
 
     @PostMapping(value = "/save")

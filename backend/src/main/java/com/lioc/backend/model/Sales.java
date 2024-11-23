@@ -31,7 +31,18 @@ public class Sales {
     @JoinColumn(name = "productid")
     private Product product;
 
+    @ManyToOne
+    @JoinColumn(name = "supplierid")
+    private Supplier supplier;
+
     @Column(name = "qty")
     private double qty;
+
+    @PrePersist
+    public void prePersist() {
+        if (date == null) {
+            date = new Date();
+        }
+    }
 
 }
