@@ -12,6 +12,7 @@ import Navbar from './Components/navbar';
 import Footer from './Components/footer';
 
 const App = () => {
+  const userRole = localStorage.getItem('userRole');
   return (
     <Router>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -21,7 +22,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard userRole="sales" />}>
+            <Route path="/dashboard" element={<Dashboard userRole={userRole} />}>
               <Route path="inventory/*" element={<InventoryM />} />
               <Route path="sales/*" element={<SalesM />} />
               <Route path="supplier/*" element={<SupplierM />} />

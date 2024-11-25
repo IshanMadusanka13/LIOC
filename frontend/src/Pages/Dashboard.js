@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 
 const Dashboard = ({ userRole }) => {
-  userRole = "customer"; // Default role for testing
+  //userRole = "customer"; // Default role for testing
+  //console.log(userRole);
   const navigate = useNavigate();
 
   const roles = {
@@ -14,20 +15,21 @@ const Dashboard = ({ userRole }) => {
 
   const menuItems = {
     inventory: [
-      { name: 'Stock Overview', path: 'inventory/stock' },
-      { name: 'Orders', path: 'inventory/orders' },
+      { name: 'Stock Add', path: 'inventory/add' },
+      { name: 'Stock Manage', path: 'inventory/manage' },
     ],
     sales: [
       { name: 'Sales Overview', path: 'sales/overview' },
       { name: 'Transactions', path: 'sales/transactions' },
     ],
     supplier: [
-      { name: 'List', path: 'supplier/list' },
-      { name: 'Chain', path: 'supplier/chain' },
+      { name: 'Supplier Add', path: 'supplier/add' },
+      { name: 'Supplier Manage', path: 'supplier/manage' },
+      
     ],
     customer: [
-      { name: 'List', path: 'customer/list' },
-      { name: 'Loyalty', path: 'customer/loyalty' },
+      { name: 'Profile', path: 'customer/profile' },
+      
     ],
   };
 
