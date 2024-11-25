@@ -1,9 +1,9 @@
 package com.lioc.backend.service;
 
+import com.lioc.backend.dto.CustomerRegisterDTO;
 import com.lioc.backend.model.Customer;
 import com.lioc.backend.repository.CustomerRepository;
 import com.lioc.backend.repository.UserRepository;
-import com.lioc.backend.util.dto.CustomerRegisterDTO;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,15 @@ import java.util.NoSuchElementException;
 public class CustomerService {
 
     private CustomerRepository customerRepository;
-    private UserRepository userRepository;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository, UserRepository userRepository) {
+    public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
-        this.userRepository = userRepository;
     }
 
     //Find all
     public List<Customer> getAll() {
-        List<Customer> customers = customerRepository.findAll();
-        return customers;
+        return customerRepository.findAll();
     }
 
     //Search
@@ -91,7 +88,7 @@ public class CustomerService {
             throw new NoSuchElementException("customer not found with the id : " + nic);
         } else {
             customerRepository.delete(c);
-            return "Customer Deleted Succesfully";
+            return "Customer Deleted Successfully";
         }
     }
 

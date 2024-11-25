@@ -1,4 +1,4 @@
-package com.lioc.backend.util.dto;
+package com.lioc.backend.dto;
 
 import com.lioc.backend.model.Customer;
 import com.lioc.backend.model.User;
@@ -15,7 +15,6 @@ public class CustomerRegisterDTO {
     private String name;
     private String nic;
     private String mobile;
-    private double creditAmount;
     private String email;
     private String password;
 
@@ -29,7 +28,7 @@ public class CustomerRegisterDTO {
         customer.setName(name);
         customer.setNic(nic);
         customer.setMobile(mobile);
-        customer.setCreditAmount(creditAmount);
+        customer.setCreditAmount(25000);
         customer.setUser(user);
 
         return customer;

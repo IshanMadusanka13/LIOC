@@ -1,5 +1,6 @@
 package com.lioc.backend.controller;
 
+import com.lioc.backend.dto.PaymentDTO;
 import com.lioc.backend.model.Payment;
 import com.lioc.backend.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class PaymentController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addPayment(@RequestBody Payment payment) {
-        return ResponseEntity.ok(paymentService.addPayment(payment));
+    public ResponseEntity<String> addPayment(@RequestBody PaymentDTO paymentDTO) {
+        return ResponseEntity.ok(paymentService.addPayment(paymentDTO));
     }
 
     @PutMapping("/update/{paymentId}")

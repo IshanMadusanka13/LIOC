@@ -1,8 +1,8 @@
 package com.lioc.backend.controller;
 
+import com.lioc.backend.dto.CustomerRegisterDTO;
 import com.lioc.backend.model.Customer;
 import com.lioc.backend.service.CustomerService;
-import com.lioc.backend.util.dto.CustomerRegisterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

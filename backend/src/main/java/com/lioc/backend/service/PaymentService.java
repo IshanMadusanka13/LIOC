@@ -1,5 +1,6 @@
 package com.lioc.backend.service;
 
+import com.lioc.backend.dto.PaymentDTO;
 import com.lioc.backend.model.Customer;
 import com.lioc.backend.model.Payment;
 import com.lioc.backend.repository.CustomerRepository;
@@ -39,11 +40,20 @@ public class PaymentService {
         return payment;
     }
 
-    public String addPayment(Payment payment) {
+    public String addPayment(PaymentDTO paymentDTO) {
+
+        Customer c = customerRepository.findByNic(paymentDTO.getNic());
+        if (c == null) {
+            log.error("Customer not found");
+            throw new NoSuchElementException("Customer not found");
+        }
+
+        c.setCreditAmount(c.getCreditAmount() + paymentDTO.getAmount());
+
+        Payment payment = paymentDTO.DTOToEntity();
+        payment.setCustomer(c);
+
         paymentRepository.save(payment);
-        log.info(payment.getCustomer().getCustomerId());
-        Customer c = customerRepository.findByCustomerId(payment.getCustomer().getCustomerId());
-        c.setCreditAmount(c.getCreditAmount() + payment.getAmount());
         customerRepository.save(c);
         log.info("Added new payment");
         return "Payment added Successfully";
