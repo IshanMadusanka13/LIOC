@@ -114,19 +114,16 @@
         <insert tableName="inventory" schemaName="lioc_filling">
             <column name="inventoryid" value="1"/>
             <column name="productid" value="1"/>
-            <column name="supplierid" value="1"/>
             <column name="qty" value="15000"/>
         </insert>
         <insert tableName="inventory" schemaName="lioc_filling">
             <column name="inventoryid" value="2"/>
             <column name="productid" value="2"/>
-            <column name="supplierid" value="2"/>
             <column name="qty" value="12000"/>
         </insert>
         <insert tableName="inventory" schemaName="lioc_filling">
             <column name="inventoryid" value="3"/>
             <column name="productid" value="3"/>
-            <column name="supplierid" value="1"/>
             <column name="qty" value="10000"/>
         </insert>
     </changeSet>

@@ -83,15 +83,14 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="productid" type="INT"/>
-            <column name="supplierid" type="INT"/>
             <column name="qty" type="DOUBLE"/>
         </createTable>
         <addForeignKeyConstraint
                 baseTableName="inventory"
-                baseColumnNames="supplierid, productid"
-                referencedTableName="supplier_supply_product"
-                referencedColumnNames="supplierid, productid"
-                constraintName="fk_inventory_supplier_supply_product1"/>
+                baseColumnNames="productid"
+                referencedTableName="product"
+                referencedColumnNames="productid"
+                constraintName="fk_inventory_product"/>
     </changeSet>
 
     <changeSet id="create-table-payment" author="admin">
@@ -138,15 +137,14 @@
             <column name="machine" type="VARCHAR(45)"/>
             <column name="date" type="DATE"/>
             <column name="productid" type="INT"/>
-            <column name="supplierid" type="INT"/>
             <column name="qty" type="DOUBLE"/>
         </createTable>
         <addForeignKeyConstraint
                 baseTableName="sales"
-                baseColumnNames="supplierid, productid"
-                referencedTableName="supplier_supply_product"
-                referencedColumnNames="supplierid, productid"
-                constraintName="fk_sales_supplier_supply_product1"/>
+                baseColumnNames="productid"
+                referencedTableName="product"
+                referencedColumnNames="productid"
+                constraintName="fk_sales_product"/>
     </changeSet>
 
 </databaseChangeLog>

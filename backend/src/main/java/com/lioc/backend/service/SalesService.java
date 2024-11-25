@@ -42,7 +42,7 @@ public class SalesService {
     public String addSales(Sales sales) {
         try {
             salesRepository.save(sales);
-            Inventory i = inventoryRepository.findByProduct_ProductIdAndSupplier_SupplierId(sales.getProduct().getProductId(), sales.getSupplier().getSupplierId());
+            Inventory i = inventoryRepository.findByProduct_ProductId(sales.getProduct().getProductId());
             i.setQty(i.getQty()-sales.getQty());
             inventoryRepository.save(i);
             log.info("Added new sales record");
