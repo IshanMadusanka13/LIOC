@@ -1,20 +1,37 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from '../Service/loginService';
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
-   
   });
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here
-    navigate('/dashboard'); // Redirect to dashboard after login
+    try {
+      const userData = await loginUser(formData);
+      
+      let userRole = '';
+      if (userData.userType === 'EMPLOYEE') {
+        userRole = userData.employeeDetails.role.toLowerCase();
+      } else if (userData.userType === 'CUSTOMER') {
+        userRole = 'customer';
+      }
+      
+
+      // Save complete user data in localStorage
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('userRole', userRole);
+
+      navigate('/dashboard', { state: { userRole } });
+      
+    } catch (error) {
+      alert('Invalid email or password');
+    }
   };
 
   return (
@@ -48,7 +65,6 @@ const Login = () => {
               required
             />
           </div>
-          
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
